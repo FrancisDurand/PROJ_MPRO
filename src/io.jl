@@ -84,7 +84,7 @@ function save_solution(isOptimal, x, resolutionTime, method, instance, s)
             end
         end
 
-        output_file = "../res/" * method * "/" * instance
+        output_file = "res/" * method * "/" * instance
         fout = open(output_file, "w")
 
         index = findfirst(arc -> arc[1] == s, chemin)
