@@ -86,13 +86,16 @@ function save_solution(isOptimal, x, resolutionTime, method, instance, s)
 
         output_file = "res/" * method * "/" * instance
         fout = open(output_file, "w")
-
+        
+        print(fout, "[")
         index = findfirst(arc -> arc[1] == s, chemin)
         for i in 1:length(chemin)
-            print(fout, chemin[index]," ")
+            print(fout, chemin[index][1], ", ")
+            if i == length(chemin)
+                println(fout,chemin[index][2], "]")
+            end
             index = findfirst(arc -> arc[1] == chemin[index][2], chemin)
         end
-        println(fout, "")
     end
     println(fout, "solveTime = ", resolutionTime) 
     println(fout, "isOptimal = ", isOptimal)
