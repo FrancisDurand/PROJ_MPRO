@@ -1,6 +1,7 @@
 include("io.jl")
 include("dualisation.jl")
 include("plans_coupants.jl")
+include("branch_and_cut.jl")
 
 # Récupérer les données de l'instance
 instance = "20_USA-road-d.BAY.gr"
@@ -15,3 +16,9 @@ save_solution(isOptimal, x, resolutionTime, "dualisation", instance, s)
 
 isOptimal, x, resolutionTime = plan_coupants(n, s, t, S, d1, d2, p, ph, d, D)
 save_solution(isOptimal, x, resolutionTime, "plans_coupants", instance, s)
+
+# Résolution par branch-and-cut
+
+isOptimal, x, resolutionTime = branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
+save_solution(isOptimal, x, resolutionTime, "branch_and_cut", instance, s)
+
