@@ -3,9 +3,10 @@ include("pb_statique.jl")
 include("dualisation.jl")
 include("plans_coupants.jl")
 include("branch_and_cut.jl")
+include("heuristique.jl")
 
 # Récupérer les données de l'instance
-instance = "20_USA-road-d.BAY.gr"
+instance = "40_USA-road-d.BAY.gr"
 file_name = "data/" * instance
 n, s, t, S, d1, d2, p, ph, d, D = read_instance(file_name)
 
@@ -25,3 +26,9 @@ save_solution(isOptimal, x, resolutionTime, "plans_coupants", instance, s)
 isOptimal, x, resolutionTime = branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
 save_solution(isOptimal, x, resolutionTime, "branch_and_cut", instance, s)
 
+# Résolution par heuristique
+# isOptimal, path, resolutionTime = heuristique(n, s, t, S, p, d)
+# save_solution_heuristique(isOptimal, path, resolutionTime, instance)
+
+# Diagramme de performances
+performanceDiagram()

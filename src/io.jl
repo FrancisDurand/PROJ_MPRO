@@ -1,5 +1,6 @@
-inf = 1000000
+using Plots
 
+inf = 99999999999
 
 """
 Lire une instance
@@ -69,7 +70,7 @@ Argument
 - isOptimal : true si le problème est résolu de manière optimale
 - x : tableau de variables bidimensionnelles tel que x[i, j] = 1 si on passe de i à j
 - resolutionTime : temps de résolution en secondes
-- method : dualisation, plans_coupants, branch_and_cut ou heuristique
+- method : dualisation, plans_coupants ou branch_and_cut
 - instance : nom de l'instance
 - s : sommet d'origine
 """
@@ -101,3 +102,135 @@ function save_solution(isOptimal, x, resolutionTime, method, instance, s)
     println(fout, "isOptimal = ", isOptimal)
     close(fout)
 end
+
+
+"""
+Écrire une solution donnée par l'heuristique dans un fichier de sortie
+
+Argument
+- isOptimal : true si le problème est résolu
+- path : vector avec le chemin
+- resolutionTime : temps de résolution en secondes
+- instance : nom de l'instance
+"""
+function save_solution_heuristique(isOptimal, path, resolutionTime, instance)
+    if isOptimal
+        output_file = "res/" * "heuristique" * "/" * instance
+        fout = open(output_file, "w")
+        println(fout, path)
+    end
+    println(fout, "solveTime = ", resolutionTime) 
+    println(fout, "isOptimal = ", isOptimal)
+    close(fout)
+end
+
+
+"""
+Créer un fichier contenant un diagramme de performances associé aux résultats du dossier /res
+Affichez une courbe pour chaque sous-dossier du dossier /res.
+
+Conditions préalables:
+- Chaque sous-dossier doit contenir des fichiers .gr
+- Chaque fichier .gr correspond à la résolution d'une instance
+- Chaque fichier .gr contient une variable "solveTime" et une variable "isOptimal"
+"""
+
+function performanceDiagram()
+    resultFolder = "res/"
+    
+    maxSize = 0 # nb max de fichiers dans un sous-dossier
+    subfolderCount = 0 # nb de sous-dossiers
+
+    folderName = Array{String, 1}()
+    # Pour chaque fichier dans resultFolder
+    for file in readdir(resultFolder)
+        path = resultFolder * file
+        # S'il s'agit d'un sous-dossier
+        if isdir(path)
+            folderName = vcat(folderName, file)
+            subfolderCount += 1
+            folderSize = size(readdir(path), 1)
+            if maxSize < folderSize
+                maxSize = folderSize
+            end
+        end
+    end
+
+    # Tableau qui contiendra les temps de résolution (une ligne pour chaque sous-dossier)
+    results = fill(Inf, subfolderCount, maxSize)
+
+    folderCount = 0
+    maxSolveTime = 0
+
+    # Pour chaque sous-dossier
+    for folder in folderName
+        path = joinpath(resultFolder, folder)
+        folderCount += 1
+        fileCount = 0
+        
+        # Pour chaque fichier dans le sous-dossier
+        for resultFile in readdir(path)
+            fileCount += 1
+            include("../" * path * "/" * resultFile)
+            if isOptimal
+                results[folderCount, fileCount] = solveTime
+                if solveTime > maxSolveTime
+                    maxSolveTime = solveTime
+                end
+            end
+        end
+    end
+
+    results = sort(results, dims=2)
+    # print(maxSolveTime)
+
+    # Pour chaque ligne
+    for dim in 1: size(results, 1)
+        x = Array{Float64, 1}()
+        y = Array{Float64, 1}()
+
+        # coordonnée x du point d'inflexion précédent
+        previousX = 0
+        previousY = 0
+
+        append!(x, previousX)
+        append!(y, previousY)
+            
+        # Position actuelle dans la ligne
+        currentId = 1
+
+        # Alors que la fin de la ligne n'est pas atteinte
+        while currentId != size(results, 2) && results[dim, currentId] != Inf
+            # Nombre d'éléments qui ont la valeur previousX
+            identicalValues = 1
+            
+            # Alors que la valeur est la même
+            while results[dim, currentId] == previousX && currentId <= size(results, 2)
+                currentId += 1
+                identicalValues += 1
+            end
+
+            append!(x, previousX)
+            append!(y, currentId - 1)
+
+            if results[dim, currentId] != Inf
+                append!(x, results[dim, currentId])
+                append!(y, currentId - 1)
+            end
+            
+            previousX = results[dim, currentId]
+            previousY = currentId - 1  
+        end
+
+        append!(x, maxSolveTime)
+        append!(y, currentId - 1)
+
+        # Si c'est le premier sous-dossier
+        if dim == 1
+            plot(x, y, label = folderName[dim], legend = :bottomright, xaxis = "Time (s)", yaxis = "Solved instances",linewidth=3)
+
+        else
+            savefig(plot!(x, y, label = folderName[dim], linewidth=3), "performance_diagram")
+        end 
+    end
+end 
