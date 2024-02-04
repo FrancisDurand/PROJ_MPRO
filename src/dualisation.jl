@@ -15,6 +15,7 @@ Return
 function dualisation(n, s, t, S, d1, d2, p, ph, d, D)
     # Créer le modèle
     m = JuMP.Model(CPLEX.Optimizer)
+    set_optimizer_attribute(m, "CPX_PARAM_SCRIND", 0) # Remove the solver output
 
     # Variables du modèle
     @variable(m, x[1:n, 1:n], Bin)
