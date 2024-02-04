@@ -4,7 +4,7 @@ include("plans_coupants.jl")
 include("branch_and_cut.jl")
 
 # Récupérer les données de l'instance
-instance = "20_USA-road-d.BAY.gr"
+instance = "100_USA-road-d.COL.gr"
 file_name = "data/" * instance
 n, s, t, S, d1, d2, p, ph, d, D = read_instance(file_name)
 

@@ -57,9 +57,9 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
         current_x = callback_value.(cb_data, x)
         current_y = callback_value.(cb_data, y)
         current_z = callback_value(cb_data, z)
-        println("Called from (x, y,z ) = ($current_x, $current_y, $current_z")
+        #println("Called from (x, y,z ) = ($current_x, $current_y, $current_z")
         status = callback_node_status(cb_data, m)
-            println("Solution is integer feasible!")
+            #println("Solution is integer feasible!")
 
             # Résoudre le sous problème liéé à U^1
             esclave_1 = JuMP.Model(CPLEX.Optimizer)
@@ -81,7 +81,7 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
 
             if current_z1 > current_z + 1e-6
                 con = @build_constraint( z >= sum(d[i,j]*x[i,j] for i in 1:n, j in 1:n) + sum(d[i,j]*current_delta1[i,j]*x[i,j] for i in 1:n, j in 1:n))
-                println("Adding $(con)")
+                #println("Adding $(con)")
                 MOI.submit(m, MOI.LazyConstraint(cb_data), con)
             end
 
@@ -97,7 +97,7 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
 
             if current_z2 > S + 1e-6
                 con = @build_constraint(sum(y[v]*p[v] for v in 1:n) + sum(y[v]*ph[v]*current_delta2[v] for v in 1:n) <= S)
-                println("Adding $(con)")
+                #println("Adding $(con)")
                 MOI.submit(m, MOI.LazyConstraint(cb_data), con)
             end
     end
