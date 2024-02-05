@@ -54,18 +54,18 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D)
     # Résoudre le programme maître initial
     optimize!(m)
 
+    current_x = value.(x)
+    current_y = value.(y)
+    current_z = value(z)
+
 
     # Boucle principale du problème d'optimisation par plan coupant
     for iteration in 1:100  #Limite de 100 plans coupants ajoutés pour l'instant
         println("\nIteration $iteration:")
 
+        
             # Vérifier si l'optimisation a réussi
         if termination_status(m) == MOI.OPTIMAL
-            # Récupérer les valeurs optimales des variables
-            current_x = value.(x)
-            current_y = value.(y)
-            current_z = value(z)
-
             println("x: ", current_x)
             println("y: ", current_y)
             println("Valeur du programme avec les coupes actuelles: ", current_z)
@@ -107,7 +107,7 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D)
         # Verifier si on est optimal
 
         if current_z == current_z1 && current_z2 <= S 
-            return true, x, time() - start
+            return true, current_x, time() - start
 
         else
             # Ajouter la coupe liéé à U^1
@@ -119,6 +119,12 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D)
 
         # Résoudre le programme maître avec la nouvelle coupe
         optimize!(m)
+
+        # Récupérer les valeurs optimales des variables
+        current_x = value.(x)
+        current_y = value.(y)
+        current_z = value(z)
+
 
         # Afficher les résultats de l'itération actuelle
         println("Objective value: ", objective_value(m))

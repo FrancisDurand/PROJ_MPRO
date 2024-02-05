@@ -74,8 +74,9 @@ Argument
 - instance : nom de l'instance
 - s : sommet d'origine
 """
+
+#Je ne comprends pas pourquoi on verifie que notre solution est optimale
 function save_solution(isOptimal, x, resolutionTime, method, instance, s)
-    if isOptimal
         chemin = []
         for i in 1:n
             for j in 1:n
@@ -97,7 +98,7 @@ function save_solution(isOptimal, x, resolutionTime, method, instance, s)
             end
             index = findfirst(arc -> arc[1] == chemin[index][2], chemin)
         end
-    end
+        
     println(fout, "solveTime = ", resolutionTime) 
     println(fout, "isOptimal = ", isOptimal)
     close(fout)
@@ -137,7 +138,6 @@ Conditions préalables:
 
 function performanceDiagram()
     resultFolder = "res/"
-    
     maxSize = 0 # nb max de fichiers dans un sous-dossier
     subfolderCount = 0 # nb de sous-dossiers
 
@@ -171,7 +171,7 @@ function performanceDiagram()
         # Pour chaque fichier dans le sous-dossier
         for resultFile in readdir(path)
             fileCount += 1
-            include("../" * path * "/" * resultFile)
+            include("../" * path * "/" * resultFile) # J'ai des bugs que je ne comprendspas avec cette ligne donc je ne teste pas le diagramme
             if isOptimal
                 results[folderCount, fileCount] = solveTime
                 if solveTime > maxSolveTime

@@ -75,7 +75,6 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
 
             #Ajout de la lazy constraint
 
-
             current_delta1 = value.(delta1)
             current_z1 = objective_value(esclave_1)
 

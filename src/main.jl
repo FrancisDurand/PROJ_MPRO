@@ -6,12 +6,8 @@ include("branch_and_cut.jl")
 include("heuristique.jl")
 
 # Récupérer les données de l'instance
-<<<<<<< HEAD
-instance = "100_USA-road-d.COL.gr"
-=======
-instance = "40_USA-road-d.BAY.gr"
->>>>>>> 7d9c777eff2d8ade31718399857d4fb812ff4869
-file_name = "data/" * instance
+instance = "20_USA-road-d.COL.gr"
+file_name = "data\\" * instance
 n, s, t, S, d1, d2, p, ph, d, D = read_instance(file_name)
 
 # Problème statique
@@ -35,4 +31,4 @@ save_solution(isOptimal, x, resolutionTime, "branch_and_cut", instance, s)
 # save_solution_heuristique(isOptimal, path, resolutionTime, instance)
 
 # Diagramme de performances
-performanceDiagram()
+#performanceDiagram()
