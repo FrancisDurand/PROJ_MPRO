@@ -75,7 +75,6 @@ Argument
 - s : sommet d'origine
 """
 
-#Je ne comprends pas pourquoi on verifie que notre solution est optimale
 function save_solution(isOptimal, x, resolutionTime, method, instance, s)
         chemin = []
         for i in 1:n
