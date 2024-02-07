@@ -76,7 +76,7 @@ Argument
 """
 
 function save_solution(isOptimal, x, resolutionTime, method, instance, s)
-    # if isOptimal
+    if isOptimal
         chemin = []
         for i in 1:n
             for j in 1:n
@@ -98,7 +98,7 @@ function save_solution(isOptimal, x, resolutionTime, method, instance, s)
             end
             index = findfirst(arc -> arc[1] == chemin[index][2], chemin)
         end
-    # end    
+    end    
     println(fout, "solveTime = ", resolutionTime) 
     println(fout, "isOptimal = ", isOptimal)
     close(fout)
