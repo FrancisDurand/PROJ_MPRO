@@ -1,3 +1,6 @@
+using CPLEX
+using JuMP
+
 inf = 99999999999
 
 function heuristique_statique(n, s, t, S, p, d)
@@ -107,3 +110,126 @@ function heuristique_statique(n, s, t, S, p, d)
 
     return true, path, accumulated_duration[t], time() - start
 end
+
+"""
+
+Constat 1 : Les valeurs de S sont beaucoup plus grandes que d2 (d2 est de l'ordre de 1% de S)
+
+Constat 2 : Les D_ij sont grand devant d1 dans un bon nombre de cas -> ça laisse penser qu'avoir un
+chemin résistant à une unique "attaque" sur l'un des arc va dans un bon nombre de cas être une bonne solution,
+a condition bien sur que ce chemin ne soit pas beaucoup trop long
+
+Idée de l'heuristique pour le problème robuste : 
+De ces deux constats vient une heuristique : Résoudre le problème robuste avec le budjet S-d2 à la place de S.
+On construit ainsi un chemin acceptable (bien souvent, j'ai l'impression que S-d2 reste grand en comparaison des poids des chemins construits)
+Il reste rendre ce chemin moins vulnérable aux attaques sur un arc, pour ce faire, on va simplement 
+enlever l'arc qui est la plus vulnérable à une attaque, et appeler recursivement ce qui précède jusqu'à 
+ce que s et t soient déconnéctés, on renvoie alors le meilleur des chemins qu'on a considéré
+
+"""
+
+function chemin_vulnerable(n, s, t, S, d2, p, d)
+    exist_path, path, _, _ = heuristique_statique(n, s, t, S-d2, p, d)
+    if !exist_path
+        return false, [] #si on a trouvé un chemin et le chemin en question
+    else
+        return true, path
+    end
+end
+
+
+function heuristique(n, s, t, S, d1, d2, p, ph, d, D)
+    start = time()
+    _, path = chemin_vulnerable(n, s, t, S, d2, p, d)
+    best_path = path
+
+    #calcul de la valeur du chemin pour le vrai problème robuste
+
+    #recuperation de la valeur des arcs
+    arcs = []
+    cout_arcs = []
+    var_cout_arc = []
+    for i in 1::(length(path)-1)
+        arcs.append((path[i],path[i+1]))
+        cout_arcs.append(d[path[i],path[i+1]])
+        var_cout_arc.append(D[path[i],path[i+1]])
+    end
+
+
+
+    #Calcul du vrai poids de notre chemin
+    model = JuMP.Model(CPLEX.Optimizer)
+    @variable(model, 0 <= delta1[1:length(arcs)])
+    for i in 1::length(arcs)
+        @constraint(model,delta1[i] <= D[path[i],path[i+1]])
+    end
+    @constraint(model,sum(delta1[i] for i in 1:length(arcs)) <= d1)
+    @objective(esclave_1, Max, sum(cout_arcs[i] for i in 1:length(arcs)) + sum(cout_arcs[i]delta1[i] for i in 1:length(arcs)))
+    optimize!(model)
+    vrai_cout_path = objective_value(model)
+
+    best_path_cout = vrai_cout_path
+
+    #calcul de l'arête qui doit être éjectée
+    pire_arc = 1
+    cout_pire_arc = min(d1,var_cout_arc[1])*cout_arcs[1]
+    for i in range 1:length(arcs)
+        if cout_pire_arc >= min(d1,var_cout_arc[i])*cout_arcs[i]
+            pire_arc = i
+            cout_pire_arc = min(d1,var_cout_arc[i])*cout_arcs[i]
+        end
+    end
+
+    while vrai_cout_path < inf
+
+        #retirer le pire arc du graphe
+        d[path[i],path[i+1]] = inf
+
+        #recalcul des quantités
+
+        _, path = chemin_vulnerable(n, s, t, S, d2, p, d)
+
+        #calcul de la valeur du chemin pour le vrai problème robuste
+
+        #recuperation de la valeur des arcs
+        arcs = []
+        cout_arcs = []
+        var_cout_arc = []
+        for i in 1::(length(path)-1)
+            arcs.append((path[i],path[i+1]))
+            cout_arcs.append(d[path[i],path[i+1]])
+            var_cout_arc.append(D[path[i],path[i+1]])
+        end
+
+        #Calcul du vrai poids de notre chemin
+        model = JuMP.Model(CPLEX.Optimizer)
+        @variable(model, 0 <= delta1[1:length(arcs)])
+        for i in 1::length(arcs)
+            @constraint(model,delta1[i] <= D[path[i],path[i+1]])
+        end
+        @constraint(model,sum(delta1[i] for i in 1:length(arcs)) <= d1)
+        @objective(esclave_1, Max, sum(cout_arcs[i] for i in 1:length(arcs)) + sum(cout_arcs[i]delta1[i] for i in 1:length(arcs)))
+        optimize!(model)
+        vrai_cout_path = objective_value(model)
+
+        if best_path_cout >= vrai_cout_path
+            best_path_cout = vrai_cout_path
+            best_path = path
+        end
+
+        
+        #calcul de l'arête qui doit être éjectée
+        pire_arc = 1
+        cout_pire_arc = min(d1,var_cout_arc[1])*cout_arcs[1]
+        for i in range 1:length(arcs)
+            if cout_pire_arc >= min(d1,var_cout_arc[i])*cout_arcs[i]
+                pire_arc = i
+                cout_pire_arc = min(d1,var_cout_arc[i])*cout_arcs[i]
+            end
+        end
+            
+    end
+
+    return true, best_path, best_path_cout, time()-start #attantion, on renvoie le path et non x
+end
+
