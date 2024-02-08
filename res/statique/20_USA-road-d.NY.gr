@@ -1,3 +1,4 @@
 [2, 1, 7, 9]
-solveTime = 0.016000032424926758
-isOptimal = true
+obj = 6848.0
+solveTime = 0.017000198364257812
+solved = true

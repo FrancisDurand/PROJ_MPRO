@@ -10,6 +10,7 @@ Argument
 Return
 - true si le problème est résolu de manière optimale
 - x : tableau de variables bidimensionnelles tel que x[i, j] = 1 si on passe de i à j
+- valeur de la fonction objectif
 - temps de résolution en secondes
 - nombre de coupes ajoutées
 """
@@ -107,7 +108,7 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D)
         # Verifier si on est optimal
 
         if current_z == current_z1 && current_z2 <= S 
-            return true, current_x, time() - start
+            return true, current_x, JuMP.objective_value(m), time() - start
 
         else
             # Ajouter la coupe liéé à U^1
@@ -127,11 +128,11 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D)
 
 
         # Afficher les résultats de l'itération actuelle
-        println("Objective value: ", objective_value(m))
-        println("x = ", current_x)
-        println("y = ", current_y)
+        # println("Objective value: ", objective_value(m))
+        # println("x = ", current_x)
+        # println("y = ", current_y)
     end
 
-    return false, current_x, time() - start
+    return false, current_x, JuMP.objective_value(m), time() - start
 
 end

@@ -1,3 +1,4 @@
 [15, 11, 1, 5, 17]
-solveTime = 0.04699993133544922
-isOptimal = true
+obj = 15391.0
+solveTime = 0.08099985122680664
+solved = true

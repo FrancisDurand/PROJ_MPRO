@@ -92,7 +92,7 @@ function heuristique_statique(n, s, t, S, p, d)
 
         # si le chemin n'est pas trouvé ou si nous dépassons le poids, aucune solution respectant le poids maximum
         if predecessors[t] == 0 || accumulated_weight[t] > S
-            return false, [], time()-start
+            return false, [], [] , time()-start
         end
 
         # Reconstruction du chemin
@@ -105,5 +105,5 @@ function heuristique_statique(n, s, t, S, p, d)
         
     end
 
-    return true, path, time() - start
+    return true, path, accumulated_duration[t], time() - start
 end

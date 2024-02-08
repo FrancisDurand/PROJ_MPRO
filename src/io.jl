@@ -67,7 +67,7 @@ end
 Écrire une solution dans un fichier de sortie
 
 Argument
-- isOptimal : true si le problème est résolu de manière optimale
+- solved : true si le problème est résolu
 - x : tableau de variables bidimensionnelles tel que x[i, j] = 1 si on passe de i à j
 - resolutionTime : temps de résolution en secondes
 - method : dualisation, plans_coupants ou branch_and_cut
@@ -75,8 +75,10 @@ Argument
 - s : sommet d'origine
 """
 
-function save_solution(isOptimal, x, resolutionTime, method, instance, s)
-    # if isOptimal
+function save_solution(solved, x, obj, resolutionTime, method, instance, s)
+    output_file = "res/" * method * "/" * instance
+    fout = open(output_file, "w")
+    if solved
         chemin = []
         for i in 1:n
             for j in 1:n
@@ -85,9 +87,6 @@ function save_solution(isOptimal, x, resolutionTime, method, instance, s)
                 end
             end
         end
-
-        output_file = "res/" * method * "/" * instance
-        fout = open(output_file, "w")
         
         print(fout, "[")
         index = findfirst(arc -> arc[1] == s, chemin)
@@ -98,9 +97,10 @@ function save_solution(isOptimal, x, resolutionTime, method, instance, s)
             end
             index = findfirst(arc -> arc[1] == chemin[index][2], chemin)
         end
-    # end    
+        println(fout, "obj = ", obj) 
+    end    
     println(fout, "solveTime = ", resolutionTime) 
-    println(fout, "isOptimal = ", isOptimal)
+    println(fout, "solved = ", solved)
     close(fout)
 end
 
@@ -109,19 +109,20 @@ end
 Écrire une solution donnée par l'heuristique dans un fichier de sortie
 
 Argument
-- isOptimal : true si le problème est résolu
+- solved : true si le problème est résolu
 - path : vector avec le chemin
 - resolutionTime : temps de résolution en secondes
 - instance : nom de l'instance
 """
-function save_solution_heuristique(isOptimal, path, resolutionTime, instance)
-    if isOptimal
+function save_solution_heuristique(solved, path, obj, resolutionTime, instance)
+    if solved
         output_file = "res/" * "heuristique" * "/" * instance
         fout = open(output_file, "w")
         println(fout, path)
+        println(fout, "obj = ", obj) 
     end
     println(fout, "solveTime = ", resolutionTime) 
-    println(fout, "isOptimal = ", isOptimal)
+    println(fout, "solved = ", solved)
     close(fout)
 end
 
@@ -133,7 +134,7 @@ Affichez une courbe pour chaque sous-dossier du dossier /res.
 Conditions préalables:
 - Chaque sous-dossier doit contenir des fichiers .gr
 - Chaque fichier .gr correspond à la résolution d'une instance
-- Chaque fichier .gr contient une variable "solveTime" et une variable "isOptimal"
+- Chaque fichier .gr contient une variable "solveTime" et une variable "solved"
 """
 
 function performanceDiagram()
@@ -172,7 +173,7 @@ function performanceDiagram()
         for resultFile in readdir(path)
             fileCount += 1
             include("../" * path * "/" * resultFile) # J'ai des bugs que je ne comprendspas avec cette ligne donc je ne teste pas le diagramme
-            if isOptimal
+            if solved
                 results[folderCount, fileCount] = solveTime
                 if solveTime > maxSolveTime
                     maxSolveTime = solveTime
@@ -233,4 +234,119 @@ function performanceDiagram()
             savefig(plot!(x, y, label = folderName[dim], linewidth=3), "performance_diagram")
         end 
     end
+end 
+
+"""
+Créez un fichier latex contenant un tableau avec les résultats du dossier /res.
+Chaque sous-dossier du dossier /res contient les résultats d'une méthode de résolution.
+
+Conditions préalables:
+- Chaque sous-dossier doit contenir des fichiers texte
+- Chaque fichier texte correspond à la résolution d'une instance
+- Chaque fichier texte contient une variable "solveTime" et une variable "solved"
+"""
+function resultsArray()
+    
+    resultFolder = "res/"
+    dataFolder = "data/"
+    
+    maxSize = 0 # nb max de fichiers dans un sous-dossier
+    subfolderCount = 0 # nb de sous-dossiers
+
+    fout = open("tableau", "w")
+
+    header = raw"""
+\begin{center}
+\renewcommand{\arraystretch}{1.4} 
+ \begin{tabular}{lc"""
+
+    folderName = Array{String, 1}()
+    solvedInstances = Array{String, 1}()
+
+    # Pour chaque fichier dans resultFolder
+    for file in readdir(resultFolder)
+
+        path = resultFolder * file
+        
+        # S'il s'agit d'un sous-dossier et pas probleme statique
+        if isdir(path) && file != "statique"
+            folderName = vcat(folderName, file)
+            subfolderCount += 1
+            folderSize = size(readdir(path), 1)
+
+            for file2 in readdir(path)
+                solvedInstances = vcat(solvedInstances, file2)
+            end 
+
+            if maxSize < folderSize
+                maxSize = folderSize
+            end
+        end
+    end
+
+    unique!(solvedInstances)
+
+    
+    # Pour chaque méthode de résolution, ajoutez deux colonnes dans le tableau
+    for folder in folderName
+        header *= "rr"
+    end
+
+    header *= "}\n\t\\hline\n &"
+
+    
+    # Créez la ligne header qui contient le nom de la méthode
+    for folder in folderName
+        header *= " & \\multicolumn{2}{c}{\\textbf{" * replace(folder, "_" => "\\_") * "}}"
+    end
+
+    header *= "\\\\\n\\textbf{Instance} & \\textbf{PR}"
+
+    # Create the second header line with the content of the result columns
+    for folder in folderName
+        header *= " & \\textbf{Temps (s)} & \\textbf{Gap} "
+    end
+
+    header *= "\\\\\\hline\n"
+
+    footer = raw"""\hline\end{tabular}
+\end{center}
+
+"""
+    println(fout, header)
+    maxInstancePerPage = 30
+    id = 1
+
+    # Pour chaque fichier résolu
+    for solvedInstance in solvedInstances
+        if rem(id, maxInstancePerPage) == 0
+            println(fout, footer, "\\newpage")
+            println(fout, header)
+        end 
+
+        print(fout, replace(solvedInstance, "_" => "\\_"))
+        println(fout, " & ", "?")
+
+        # Pour chaque méthode de résolution
+        for method in folderName
+            path = resultFolder * method * "/" * solvedInstance
+            # Si l'instance a été résolue par cette méthode
+            if isfile(path)
+                include("../" * path)
+                println(fout, " & ", round(solveTime, digits=2), " & ")
+                if solved
+                    println(fout, "\$\\times\$")
+                end 
+                
+            # Si l'instance n'a pas été résolue par cette méthode
+            else
+                println(fout, " & - & - ")
+            end
+        end
+        println(fout, "\\\\")
+        id += 1
+    end
+
+    println(fout, footer)
+    close(fout)
 end 
