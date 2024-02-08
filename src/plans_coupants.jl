@@ -14,7 +14,7 @@ Return
 - nombre de coupes ajoutées
 """
 
-function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D)
+function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
 
     # Démarrer un chronomètre
     start = time()
@@ -60,9 +60,7 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D)
 
 
     # Boucle principale du problème d'optimisation par plan coupant
-    for iteration in 1:100  #Limite de 100 plans coupants ajoutés pour l'instant
-        println("\nIteration $iteration:")
-
+    while time()-start <= temps_max  #Limite de 100 plans coupants ajoutés pour l'instant
         
             # Vérifier si l'optimisation a réussi
         if termination_status(m) == MOI.OPTIMAL
