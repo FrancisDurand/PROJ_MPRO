@@ -10,6 +10,7 @@ Argument
 Return
 - true si le problème est résolu de manière optimale
 - x : tableau de variables bidimensionnelles tel que x[i, j] = 1 si on passe de i à j
+- valeur de la fonction objectif
 - temps de résolution en secondes
 """
 function dualisation(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
@@ -53,5 +54,5 @@ function dualisation(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     MOI.set(m, MOI.RawParameter("CPX_PARAM_TILIM"), temps_max)
     optimize!(m)
 
-    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, time() - start
+    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
 end

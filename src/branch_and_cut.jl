@@ -10,6 +10,7 @@ Argument
 Return
 - true si le problème est résolu de manière optimale
 - x : tableau de variables bidimensionnelles tel que x[i, j] = 1 si on passe de i à j
+- valeur de la fonction objectif
 - temps de résolution en secondes
 - nombre de coupes ajoutées
 """
@@ -102,5 +103,5 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
     end
     set_attribute(m, MOI.LazyConstraintCallback(),my_callback_function)
     optimize!(m)
-    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, time() - start
+    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
 end

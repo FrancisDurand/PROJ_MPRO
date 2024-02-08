@@ -10,6 +10,7 @@ Argument
 Return
 - true si le problème est résolu de manière optimale
 - x : tableau de variables bidimensionnelles tel que x[i, j] = 1 si on passe de i à j
+- valeur de la fonction objectif
 - temps de résolution en secondes
 """
 function pb_statique(n, s, t, S, p, d)
@@ -47,5 +48,5 @@ function pb_statique(n, s, t, S, p, d)
     # Résoudre le modèle
     optimize!(m)
 
-    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, time() - start
+    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
 end
