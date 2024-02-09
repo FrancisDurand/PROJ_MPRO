@@ -6,31 +6,24 @@
 \textbf{Instance} & \textbf{PR} & \textbf{Temps (s)} & \textbf{Gap}  & \textbf{Temps (s)} & \textbf{Gap}  & \textbf{Temps (s)} & \textbf{Gap}  & \textbf{Temps (s)} & \textbf{Gap} \\\hline
 
 20\_USA-road-d.BAY.gr & ?
- & 3.81 & 
+ & 1.94 & 
 $\times$
- & 0.08 & 
-$\times$
- & 0.0 & 
-$\times$
- & 7.5 & 
-\\
-20\_USA-road-d.COL.gr & ?
- & 0.45 & 
+ & 0.04 & 
 $\times$
  & 0.03 & 
 $\times$
- & 0.0 & 
+ & 0.22 & 
 $\times$
- & 5.81 & 
 \\
 20\_USA-road-d.NY.gr & ?
- & 0.49 & 
+ & 0.36 & 
 $\times$
- & 0.03 & 
+ & 0.02 & 
 $\times$
- & 0.0 & 
+ & 0.02 & 
 $\times$
- & 6.26 & 
+ & 20.05 & 
+$\times$
 \\
 \hline\end{tabular}
 \end{center}

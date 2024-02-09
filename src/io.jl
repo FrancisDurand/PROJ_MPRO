@@ -97,6 +97,7 @@ function save_solution(solved, x, obj, resolutionTime, method, instance, s)
             end
             index = findfirst(arc -> arc[1] == chemin[index][2], chemin)
         end
+        println(fout, "obj = ", obj) 
     end    
     println(fout, "solveTime = ", resolutionTime) 
     println(fout, "solved = ", solved)

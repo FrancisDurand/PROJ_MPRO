@@ -6,7 +6,7 @@ include("branch_and_cut.jl")
 include("heuristique.jl")
 
 # Récupérer les données de l'instance
-instance = "20_USA-road-d.NY.gr"
+instance = "20_USA-road-d.BAY.gr"
 file_name = "data/" * instance
 n, s, t, S, d1, d2, p, ph, d, D = read_instance(file_name)
 
@@ -37,8 +37,8 @@ save_solution_heuristique_statique(solved, path, obj, resolutionTime, instance)
 solved, path, obj, resolutionTime = heuristique(n, s, t, S, d1, d2, p, ph, d, D)
 save_solution_heuristique(solved, path, obj, resolutionTime, instance)
 
-# # Diagramme de performances
-# performanceDiagram()
+# Diagramme de performances
+performanceDiagram()
 
-# # Tableau de resultats
-# resultsArray()
+# Tableau de resultats
+resultsArray()
