@@ -75,7 +75,7 @@ Argument
 - s : sommet d'origine
 """
 
-function save_solution(solved, x, obj, resolutionTime, method, instance, s)
+function save_solution(solved, x, obj, resolutionTime, method, instance, s, n)
     output_file = "res/" * method * "/" * instance
     fout = open(output_file, "w")
     if solved

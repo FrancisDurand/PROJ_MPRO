@@ -56,7 +56,7 @@ function dualisation(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     # Résoudre le modèle
     optimize!(m)
 
-    if JuMP.primal_status(m) == MOI.FEASIBLE_POINT && JuMP.objective_value(m) != inf
+    if JuMP.primal_status(m) == MOI.FEASIBLE_POINT && JuMP.objective_value(m) < inf
         return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
     else
         return false, nothing, nothing, time() - start
