@@ -1,2 +1,4 @@
-solveTime = 6.264999866485596
-solved = false
+[2, 8, 7, 9]
+obj = 870.0
+solveTime = 20.045000076293945
+solved = true
