@@ -5,49 +5,110 @@
  & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
 \textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
 
-20\_USA-road-d.BAY.gr & 39.6\%
- & 1.86 & 
-0.0\%
+20\_USA-road-d.BAY.gr & 32.11\%
+ & - & - 
  & 0.06 & 
-63.25\%
+58.69\%
  & 0.03 & 
-63.25\%
+58.69\%
  & 0.57 & 
-11.04\%
+0.0\%
 \\
-20\_USA-road-d.NY.gr & 87.3\%
- & 0.36 & 
+20\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 0.03 & 
+0.0\%
+ & 0.01 & 
+0.0\%
+ & 0.09 & 
+0.0\%
+\\
+20\_USA-road-d.NY.gr & 0.0\%
+ & - & - 
+ & 0.03 & 
+0.0\%
+ & 0.02 & 
+0.0\%
+ & 0.1 & 
+0.0\%
+\\
+40\_USA-road-d.BAY.gr & 71.17\%
+ & - & - 
+ & 0.56 & 
+82.41\%
+ & 0.02 & 
+82.41\%
+ & 100.01 & 
+0.0\%
+\\
+40\_USA-road-d.COL.gr & 34.83\%
+ & - & - 
+ & 0.13 & 
+57.84\%
+ & 0.04 & 
+57.84\%
+ & 100.11 & 
+0.0\%
+\\
+40\_USA-road-d.NY.gr & 0.0\%
+ & - & - 
+ & 0.19 & 
+0.0\%
+ & 0.02 & 
+0.0\%
+ & 0.28 & 
+0.0\%
+\\
+60\_USA-road-d.BAY.gr & 0.0\%
+ & - & - 
+ & 0.88 & 
+19.05\%
+ & 0.02 & 
+0.0\%
+ & 1.47 & 
+19.05\%
+\\
+60\_USA-road-d.COL.gr & 90.97\%
+ & - & - 
+ & 0.14 & 
+94.0\%
+ & 0.09 & 
+94.0\%
+ & 100.24 & 
+0.0\%
+\\
+60\_USA-road-d.NY.gr & 79.74\%
+ & - & - 
+ & 1.04 & 
+91.94\%
+ & 0.04 & 
+91.94\%
+ & 100.55 & 
+0.0\%
+\\
+80\_USA-road-d.BAY.gr & 0.0\%
+ & - & - 
+ & 0.29 & 
+0.0\%
+ & 0.02 & 
+0.0\%
+ & - & - 
+\\
+80\_USA-road-d.COL.gr & 2.95\%
+ & - & - 
+ & 0.33 & 
+20.91\%
+ & 0.01 & 
+0.0\%
+ & - & - 
+\\
+80\_USA-road-d.NY.gr & 151.36\%
+ & - & - 
+ & 1.25 & 
 0.0\%
  & 0.03 & 
-87.3\%
- & 0.02 & 
-87.3\%
- & 0.1 & 
-87.3\%
-\\
-1000\_USA-road-d.BAY.gr & 82.93\%
- & - & - 
- & 107.63 & 
- & 5.1 & 
-85.76\%
- & 269.56 & 
-82.93\%
-\\
-1000\_USA-road-d.COL.gr & 0.0\%
- & - & - 
- & 110.29 & 
- & 4.15 & 
-13.41\%
- & 266.89 & 
 0.0\%
-\\
-1000\_USA-road-d.NY.gr & 33.6\%
  & - & - 
- & 112.65 & 
- & 1.87 & 
-33.6\%
- & 272.28 & 
-33.6\%
 \\
 100\_USA-road-d.BAY.gr & 0.0\%
  & - & - 
@@ -76,54 +137,6 @@
  & 101.91 & 
 0.0\%
 \\
-1100\_USA-road-d.BAY.gr & 96.86\%
- & - & - 
- & 113.27 & 
- & 2.77 & 
-97.95\%
- & 604.95 & 
-96.86\%
-\\
-1100\_USA-road-d.COL.gr & 0.0\%
- & - & - 
- & 113.91 & 
- & 2.07 & 
-21.17\%
- & 352.86 & 
-0.0\%
-\\
-1100\_USA-road-d.NY.gr & 30.95\%
- & - & - 
- & 127.53 & 
- & 2.07 & 
-46.15\%
- & 453.54 & 
-30.95\%
-\\
-1200\_USA-road-d.BAY.gr & 20.52\%
- & - & - 
- & 115.23 & 
- & 5.71 & 
-36.29\%
- & 1243.18 & 
-20.52\%
-\\
-1200\_USA-road-d.COL.gr & 0.0\%
- & - & - 
- & 115.76 & 
- & 2.35 & 
-21.17\%
- & 752.59 & 
-0.0\%
-\\
-1200\_USA-road-d.NY.gr & 100.0\%
- & - & - 
- & 132.94 & 
- & 4.57 & 
-50.5\%
- & 388.04 & 
-100.0\%
-\\
 120\_USA-road-d.BAY.gr & 0.0\%
  & - & - 
  & 1.17 & 
@@ -151,51 +164,6 @@
  & 100.3 & 
 0.0\%
 \\
-1300\_USA-road-d.BAY.gr & 97.92\%
- & - & - 
- & 148.1 & 
- & 32.5 & 
-98.39\%
- & 563.34 & 
-97.92\%
-\\
-1300\_USA-road-d.COL.gr & 0.0\%
- & - & - 
- & 253.18 & 
- & 8.03 & 
-16.61\%
- & 589.9 & 
-0.0\%
-\\
-1300\_USA-road-d.NY.gr & 41.2\%
- & - & - 
- & 247.16 & 
- & 3.72 & 
-49.59\%
- & 785.9 & 
-41.2\%
-\\
-1400\_USA-road-d.BAY.gr & 31.17\%
- & - & - 
- & 192.34 & 
- & 11.82 & 
-31.17\%
- & - & - 
-\\
-1400\_USA-road-d.COL.gr & 0.0\%
- & - & - 
- & 54.23 & 
- & 3.58 & 
-0.0\%
- & - & - 
-\\
-1400\_USA-road-d.NY.gr & 39.55\%
- & - & - 
- & 175.24 & 
- & 5.28 & 
-39.55\%
- & - & - 
-\\
 140\_USA-road-d.BAY.gr & 0.0\%
  & - & - 
  & 1.94 & 
@@ -205,6 +173,17 @@
  & 9.39 & 
 4.65\%
 \\
+\hline\end{tabular}
+\end{center}
+
+\newpage
+\begin{center}
+\renewcommand{\arraystretch}{1.4} 
+ \begin{tabular}{lcrrrrrrrr}
+	\hline
+ & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
+\textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
+
 140\_USA-road-d.COL.gr & 27.35\%
  & - & - 
  & 1.13 & 
@@ -222,45 +201,6 @@
 87.84\%
  & 101.82 & 
 0.0\%
-\\
-1500\_USA-road-d.BAY.gr & 94.6\%
- & - & - 
- & 507.31 & 
- & 14.24 & 
-94.6\%
- & - & - 
-\\
-1500\_USA-road-d.COL.gr & 0.0\%
- & - & - 
- & 427.57 & 
- & 6.42 & 
-0.0\%
- & - & - 
-\\
-1500\_USA-road-d.NY.gr & 37.99\%
- & - & - 
- & 371.22 & 
- & 7.7 & 
-37.99\%
- & - & - 
-\\
-\hline\end{tabular}
-\end{center}
-
-\newpage
-\begin{center}
-\renewcommand{\arraystretch}{1.4} 
- \begin{tabular}{lcrrrrrrrr}
-	\hline
- & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
-\textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
-
-1600\_USA-road-d.BAY.gr & 42.07\%
- & - & - 
- & 452.62 & 
- & 8.29 & 
-42.07\%
- & - & - 
 \\
 160\_USA-road-d.BAY.gr & 0.0\%
  & - & - 
@@ -343,22 +283,6 @@
  & 7.89 & 
 0.0\%
 \\
-20\_USA-road-d.COL.gr & 0.0\%
- & - & - 
- & 0.03 & 
-0.0\%
- & 0.01 & 
-0.0\%
- & 0.09 & 
-0.0\%
-\\
-2500\_USA-road-d.COL.gr & 88.37\%
- & - & - 
- & 119.14 & 
- & 44.89 & 
-88.37\%
- & - & - 
-\\
 250\_USA-road-d.BAY.gr & 83.73\%
  & - & - 
  & 8.74 & 
@@ -431,83 +355,14 @@
  & 100.86 & 
 0.0\%
 \\
-350\_USA-road-d.NY.gr & 0.55\%
+350\_USA-road-d.NY.gr & 0.0\%
  & - & - 
  & 61.04 & 
-0.0\%
+0.55\%
  & 0.48 & 
-6.15\%
- & - & - 
-\\
-400\_USA-road-d.BAY.gr & 11.47\%
- & - & - 
- & 65.05 & 
+6.67\%
+ & 113.77 & 
 0.0\%
- & 0.27 & 
-0.0\%
- & - & - 
-\\
-400\_USA-road-d.COL.gr & 26.21\%
- & - & - 
- & 70.16 & 
-0.0\%
- & 0.27 & 
-5.75\%
- & - & - 
-\\
-400\_USA-road-d.NY.gr & 0.0\%
- & - & - 
- & 90.71 & 
-11.98\%
- & 0.69 & 
-0.0\%
- & - & - 
-\\
-40\_USA-road-d.BAY.gr & 63.87\%
- & - & - 
- & 0.56 & 
-0.0\%
- & 0.02 & 
-0.0\%
- & - & - 
-\\
-40\_USA-road-d.COL.gr & 54.58\%
- & - & - 
- & 0.13 & 
-0.0\%
- & 0.04 & 
-0.0\%
- & - & - 
-\\
-40\_USA-road-d.NY.gr & 0.0\%
- & - & - 
- & 0.19 & 
-0.0\%
- & 0.02 & 
-0.0\%
- & - & - 
-\\
-450\_USA-road-d.BAY.gr & 52.53\%
- & - & - 
- & 103.99 & 
- & 0.58 & 
-57.41\%
- & - & - 
-\\
-450\_USA-road-d.COL.gr & 26.21\%
- & - & - 
- & 101.38 & 
-0.0\%
- & 0.76 & 
-5.75\%
- & - & - 
-\\
-450\_USA-road-d.NY.gr & 0.0\%
- & - & - 
- & 104.81 & 
- & 0.67 & 
-0.0\%
- & - & - 
 \\
 \hline\end{tabular}
 \end{center}
@@ -520,114 +375,154 @@
  & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
 \textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
 
-500\_USA-road-d.BAY.gr & 40.1\%
+400\_USA-road-d.BAY.gr & 0.0\%
+ & - & - 
+ & 65.05 & 
+10.29\%
+ & 0.27 & 
+10.29\%
+ & 113.84 & 
+0.0\%
+\\
+400\_USA-road-d.COL.gr & 13.18\%
+ & - & - 
+ & 70.16 & 
+10.32\%
+ & 0.27 & 
+15.48\%
+ & 101.99 & 
+0.0\%
+\\
+400\_USA-road-d.NY.gr & 0.0\%
+ & - & - 
+ & 90.71 & 
+11.98\%
+ & 0.69 & 
+0.0\%
+ & 136.96 & 
+8.41\%
+\\
+450\_USA-road-d.BAY.gr & 0.0\%
+ & - & - 
+ & 103.99 & 
+ & 0.58 & 
+10.29\%
+ & 129.15 & 
+0.0\%
+\\
+450\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 101.38 & 
+20.77\%
+ & 0.76 & 
+25.32\%
+ & 111.62 & 
+0.0\%
+\\
+450\_USA-road-d.NY.gr & 22.06\%
+ & - & - 
+ & 104.81 & 
+ & 0.67 & 
+22.06\%
+ & 49.96 & 
+22.06\%
+\\
+500\_USA-road-d.BAY.gr & 0.0\%
  & - & - 
  & 106.37 & 
  & 46.91 & 
-2.43\%
- & - & - 
+30.36\%
+ & 125.16 & 
+0.0\%
 \\
-500\_USA-road-d.COL.gr & 29.43\%
+500\_USA-road-d.COL.gr & 0.0\%
  & - & - 
  & 101.74 & 
-0.0\%
+22.74\%
  & 0.4 & 
-3.34\%
- & - & - 
+25.32\%
+ & 144.95 & 
+0.0\%
 \\
-500\_USA-road-d.NY.gr & 0.0\%
+500\_USA-road-d.NY.gr & 22.6\%
  & - & - 
  & 106.68 & 
  & 0.62 & 
-0.0\%
- & - & - 
+22.6\%
+ & 113.88 & 
+22.6\%
 \\
-550\_USA-road-d.BAY.gr & 17.01\%
+550\_USA-road-d.BAY.gr & 0.0\%
  & - & - 
  & 107.05 & 
  & 1.53 & 
+14.54\%
+ & 123.55 & 
 0.0\%
- & - & - 
 \\
-550\_USA-road-d.COL.gr & 32.91\%
+550\_USA-road-d.COL.gr & 42.66\%
  & - & - 
  & 101.94 & 
  & 0.79 & 
-49.89\%
- & - & - 
+57.18\%
+ & 154.02 & 
+42.66\%
 \\
-550\_USA-road-d.NY.gr & 0.0\%
+550\_USA-road-d.NY.gr & 22.6\%
  & - & - 
  & 105.09 & 
  & 0.73 & 
-0.0\%
- & - & - 
+22.6\%
+ & 82.32 & 
+22.6\%
 \\
-600\_USA-road-d.BAY.gr & 10.48\%
+600\_USA-road-d.BAY.gr & 0.0\%
  & - & - 
  & 104.13 & 
  & 0.53 & 
+9.49\%
+ & 115.4 & 
 0.0\%
- & - & - 
 \\
-600\_USA-road-d.COL.gr & 2.84\%
+600\_USA-road-d.COL.gr & 6.92\%
  & - & - 
  & 102.56 & 
  & 0.78 & 
-23.2\%
- & - & - 
+30.48\%
+ & 112.02 & 
+6.92\%
 \\
-600\_USA-road-d.NY.gr & 0.0\%
+600\_USA-road-d.NY.gr & 22.6\%
  & - & - 
  & 102.28 & 
  & 0.37 & 
-0.0\%
- & - & - 
+22.6\%
+ & 83.21 & 
+22.6\%
 \\
-60\_USA-road-d.BAY.gr & 0.0\%
- & - & - 
- & 0.88 & 
-19.05\%
- & 0.02 & 
-0.0\%
- & - & - 
-\\
-60\_USA-road-d.COL.gr & 50.66\%
- & - & - 
- & 0.14 & 
-0.0\%
- & 0.09 & 
-0.0\%
- & - & - 
-\\
-60\_USA-road-d.NY.gr & 151.36\%
- & - & - 
- & 1.04 & 
-0.0\%
- & 0.04 & 
-0.0\%
- & - & - 
-\\
-650\_USA-road-d.BAY.gr & 7.54\%
+650\_USA-road-d.BAY.gr & 0.0\%
  & - & - 
  & 103.9 & 
  & 0.82 & 
-2.66\%
- & - & - 
+9.49\%
+ & 177.09 & 
+0.0\%
 \\
-650\_USA-road-d.COL.gr & 2.84\%
+650\_USA-road-d.COL.gr & 6.92\%
  & - & - 
  & 105.02 & 
  & 1.81 & 
-23.2\%
- & - & - 
+30.48\%
+ & 148.73 & 
+6.92\%
 \\
-650\_USA-road-d.NY.gr & 0.0\%
+650\_USA-road-d.NY.gr & 15.19\%
  & - & - 
  & 103.64 & 
  & 0.72 & 
-0.0\%
- & - & - 
+15.19\%
+ & 102.9 & 
+15.19\%
 \\
 700\_USA-road-d.BAY.gr & 5.31\%
  & - & - 
@@ -643,6 +538,17 @@
 0.0\%
  & - & - 
 \\
+\hline\end{tabular}
+\end{center}
+
+\newpage
+\begin{center}
+\renewcommand{\arraystretch}{1.4} 
+ \begin{tabular}{lcrrrrrrrr}
+	\hline
+ & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
+\textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
+
 700\_USA-road-d.NY.gr & 0.0\%
  & - & - 
  & 106.79 & 
@@ -692,35 +598,11 @@
 0.0\%
  & - & - 
 \\
-80\_USA-road-d.BAY.gr & 0.0\%
- & - & - 
- & 0.29 & 
-0.0\%
- & 0.02 & 
-0.0\%
- & - & - 
-\\
-80\_USA-road-d.COL.gr & 2.95\%
- & - & - 
- & 0.33 & 
-20.91\%
- & 0.01 & 
-0.0\%
- & - & - 
-\\
-80\_USA-road-d.NY.gr & 151.36\%
- & - & - 
- & 1.25 & 
-0.0\%
- & 0.03 & 
-0.0\%
- & - & - 
-\\
-850\_USA-road-d.BAY.gr & 12.45\%
+850\_USA-road-d.BAY.gr & 2.29\%
  & - & - 
  & 108.01 & 
  & 2.12 & 
-19.33\%
+5.75\%
  & - & - 
 \\
 850\_USA-road-d.COL.gr & 15.48\%
@@ -737,17 +619,6 @@
 23.32\%
  & - & - 
 \\
-\hline\end{tabular}
-\end{center}
-
-\newpage
-\begin{center}
-\renewcommand{\arraystretch}{1.4} 
- \begin{tabular}{lcrrrrrrrr}
-	\hline
- & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
-\textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
-
 900\_USA-road-d.BAY.gr & 32.31\%
  & - & - 
  & 111.55 & 
@@ -790,6 +661,162 @@
 23.32\%
  & - & - 
 \\
+1000\_USA-road-d.BAY.gr & 9.64\%
+ & - & - 
+ & 107.63 & 
+ & 5.1 & 
+24.61\%
+ & 269.56 & 
+9.64\%
+\\
+1000\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 110.29 & 
+ & 4.15 & 
+13.41\%
+ & 266.89 & 
+0.0\%
+\\
+1000\_USA-road-d.NY.gr & 33.6\%
+ & - & - 
+ & 112.65 & 
+ & 1.87 & 
+33.6\%
+ & 272.28 & 
+33.6\%
+\\
+1100\_USA-road-d.BAY.gr & 33.07\%
+ & - & - 
+ & 113.27 & 
+ & 2.77 & 
+56.22\%
+ & 604.95 & 
+33.07\%
+\\
+\hline\end{tabular}
+\end{center}
+
+\newpage
+\begin{center}
+\renewcommand{\arraystretch}{1.4} 
+ \begin{tabular}{lcrrrrrrrr}
+	\hline
+ & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
+\textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
+
+1100\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 113.91 & 
+ & 2.07 & 
+21.17\%
+ & 352.86 & 
+0.0\%
+\\
+1100\_USA-road-d.NY.gr & 30.95\%
+ & - & - 
+ & 127.53 & 
+ & 2.07 & 
+46.15\%
+ & 453.54 & 
+30.95\%
+\\
+1200\_USA-road-d.BAY.gr & 20.52\%
+ & - & - 
+ & 115.23 & 
+ & 5.71 & 
+36.29\%
+ & 1243.18 & 
+20.52\%
+\\
+1200\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 115.76 & 
+ & 2.35 & 
+21.17\%
+ & 752.59 & 
+0.0\%
+\\
+1200\_USA-road-d.NY.gr & 100.0\%
+ & - & - 
+ & 132.94 & 
+ & 4.57 & 
+50.5\%
+ & 388.04 & 
+100.0\%
+\\
+1300\_USA-road-d.BAY.gr & 0.0\%
+ & - & - 
+ & 148.1 & 
+ & 32.5 & 
+22.7\%
+ & 563.34 & 
+0.0\%
+\\
+1300\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 253.18 & 
+ & 8.03 & 
+16.61\%
+ & 589.9 & 
+0.0\%
+\\
+1300\_USA-road-d.NY.gr & 41.2\%
+ & - & - 
+ & 247.16 & 
+ & 3.72 & 
+49.59\%
+ & 785.9 & 
+41.2\%
+\\
+1400\_USA-road-d.BAY.gr & 31.17\%
+ & - & - 
+ & 192.34 & 
+ & 11.82 & 
+31.17\%
+ & - & - 
+\\
+1400\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 54.23 & 
+ & 3.58 & 
+0.0\%
+ & - & - 
+\\
+1400\_USA-road-d.NY.gr & 39.55\%
+ & - & - 
+ & 175.24 & 
+ & 5.28 & 
+39.55\%
+ & - & - 
+\\
+1500\_USA-road-d.BAY.gr & 19.35\%
+ & - & - 
+ & 507.31 & 
+ & 14.24 & 
+19.35\%
+ & - & - 
+\\
+1500\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 427.57 & 
+ & 6.42 & 
+0.0\%
+ & - & - 
+\\
+1500\_USA-road-d.NY.gr & 37.99\%
+ & - & - 
+ & 371.22 & 
+ & 7.7 & 
+37.99\%
+ & - & - 
+\\
+1600\_USA-road-d.BAY.gr & 42.07\%
+ & - & - 
+ & 452.62 & 
+ & 8.29 & 
+42.07\%
+ & - & - 
+\\
 1600\_USA-road-d.COL.gr & 0.0\%
  & - & - 
  & - & - 
@@ -797,164 +824,31 @@
 0.0\%
  & - & - 
 \\
-1600\_USA-road-d.NY.gr &  - \%
+1600\_USA-road-d.NY.gr &  - 
  & - & - 
  & - & - 
  & 6.22 & 
 0.0\%
  & - & - 
 \\
-1700\_USA-road-d.BAY.gr &  - \%
+1700\_USA-road-d.BAY.gr &  - 
  & - & - 
  & - & - 
  & 8.39 & 
 0.0\%
  & - & - 
 \\
-1700\_USA-road-d.COL.gr &  - \%
+1700\_USA-road-d.COL.gr &  - 
  & - & - 
  & - & - 
  & 3.7 & 
 0.0\%
  & - & - 
 \\
-1700\_USA-road-d.NY.gr &  - \%
+1700\_USA-road-d.NY.gr &  - 
  & - & - 
  & - & - 
  & 7.33 & 
-0.0\%
- & - & - 
-\\
-1800\_USA-road-d.BAY.gr &  - \%
- & - & - 
- & - & - 
- & 13.34 & 
-0.0\%
- & - & - 
-\\
-1800\_USA-road-d.COL.gr &  - \%
- & - & - 
- & - & - 
- & 9.28 & 
-0.0\%
- & - & - 
-\\
-1800\_USA-road-d.NY.gr &  - \%
- & - & - 
- & - & - 
- & 8.45 & 
-0.0\%
- & - & - 
-\\
-1900\_USA-road-d.BAY.gr &  - \%
- & - & - 
- & - & - 
- & 23.81 & 
-0.0\%
- & - & - 
-\\
-1900\_USA-road-d.COL.gr &  - \%
- & - & - 
- & - & - 
- & 6.69 & 
-0.0\%
- & - & - 
-\\
-1900\_USA-road-d.NY.gr &  - \%
- & - & - 
- & - & - 
- & 8.2 & 
-0.0\%
- & - & - 
-\\
-2000\_USA-road-d.BAY.gr &  - \%
- & - & - 
- & - & - 
- & 17.49 & 
-0.0\%
- & - & - 
-\\
-2000\_USA-road-d.COL.gr &  - \%
- & - & - 
- & - & - 
- & 8.34 & 
-0.0\%
- & - & - 
-\\
-2000\_USA-road-d.NY.gr &  - \%
- & - & - 
- & - & - 
- & 7.31 & 
-0.0\%
- & - & - 
-\\
-2100\_USA-road-d.BAY.gr &  - \%
- & - & - 
- & - & - 
- & 11.49 & 
-0.0\%
- & - & - 
-\\
-2100\_USA-road-d.COL.gr &  - \%
- & - & - 
- & - & - 
- & 9.31 & 
-0.0\%
- & - & - 
-\\
-2100\_USA-road-d.NY.gr &  - \%
- & - & - 
- & - & - 
- & 8.67 & 
-0.0\%
- & - & - 
-\\
-2200\_USA-road-d.BAY.gr &  - \%
- & - & - 
- & - & - 
- & 8.25 & 
-0.0\%
- & - & - 
-\\
-2200\_USA-road-d.COL.gr &  - \%
- & - & - 
- & - & - 
- & 13.7 & 
-0.0\%
- & - & - 
-\\
-2200\_USA-road-d.NY.gr &  - \%
- & - & - 
- & - & - 
- & 9.67 & 
-0.0\%
- & - & - 
-\\
-2300\_USA-road-d.BAY.gr &  - \%
- & - & - 
- & - & - 
- & 9.96 & 
-0.0\%
- & - & - 
-\\
-2300\_USA-road-d.COL.gr &  - \%
- & - & - 
- & - & - 
- & 14.37 & 
-0.0\%
- & - & - 
-\\
-2300\_USA-road-d.NY.gr &  - \%
- & - & - 
- & - & - 
- & 10.36 & 
-0.0\%
- & - & - 
-\\
-2400\_USA-road-d.BAY.gr &  - \%
- & - & - 
- & - & - 
- & 13.86 & 
 0.0\%
  & - & - 
 \\
@@ -969,17 +863,168 @@
  & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
 \textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
 
-2400\_USA-road-d.COL.gr &  - \%
+1800\_USA-road-d.BAY.gr &  - 
+ & - & - 
+ & - & - 
+ & 13.34 & 
+0.0\%
+ & - & - 
+\\
+1800\_USA-road-d.COL.gr &  - 
+ & - & - 
+ & - & - 
+ & 9.28 & 
+0.0\%
+ & - & - 
+\\
+1800\_USA-road-d.NY.gr &  - 
+ & - & - 
+ & - & - 
+ & 8.45 & 
+0.0\%
+ & - & - 
+\\
+1900\_USA-road-d.BAY.gr &  - 
+ & - & - 
+ & - & - 
+ & 23.81 & 
+0.0\%
+ & - & - 
+\\
+1900\_USA-road-d.COL.gr &  - 
+ & - & - 
+ & - & - 
+ & 6.69 & 
+0.0\%
+ & - & - 
+\\
+1900\_USA-road-d.NY.gr &  - 
+ & - & - 
+ & - & - 
+ & 8.2 & 
+0.0\%
+ & - & - 
+\\
+2000\_USA-road-d.BAY.gr &  - 
+ & - & - 
+ & - & - 
+ & 17.49 & 
+0.0\%
+ & - & - 
+\\
+2000\_USA-road-d.COL.gr &  - 
+ & - & - 
+ & - & - 
+ & 8.34 & 
+0.0\%
+ & - & - 
+\\
+2000\_USA-road-d.NY.gr &  - 
+ & - & - 
+ & - & - 
+ & 7.31 & 
+0.0\%
+ & - & - 
+\\
+2100\_USA-road-d.BAY.gr &  - 
+ & - & - 
+ & - & - 
+ & 11.49 & 
+0.0\%
+ & - & - 
+\\
+2100\_USA-road-d.COL.gr &  - 
+ & - & - 
+ & - & - 
+ & 9.31 & 
+0.0\%
+ & - & - 
+\\
+2100\_USA-road-d.NY.gr &  - 
+ & - & - 
+ & - & - 
+ & 8.67 & 
+0.0\%
+ & - & - 
+\\
+2200\_USA-road-d.BAY.gr &  - 
+ & - & - 
+ & - & - 
+ & 8.25 & 
+0.0\%
+ & - & - 
+\\
+2200\_USA-road-d.COL.gr &  - 
+ & - & - 
+ & - & - 
+ & 13.7 & 
+0.0\%
+ & - & - 
+\\
+2200\_USA-road-d.NY.gr &  - 
+ & - & - 
+ & - & - 
+ & 9.67 & 
+0.0\%
+ & - & - 
+\\
+2300\_USA-road-d.BAY.gr &  - 
+ & - & - 
+ & - & - 
+ & 9.96 & 
+0.0\%
+ & - & - 
+\\
+2300\_USA-road-d.COL.gr &  - 
+ & - & - 
+ & - & - 
+ & 14.37 & 
+0.0\%
+ & - & - 
+\\
+2300\_USA-road-d.NY.gr &  - 
+ & - & - 
+ & - & - 
+ & 10.36 & 
+0.0\%
+ & - & - 
+\\
+2400\_USA-road-d.BAY.gr &  - 
+ & - & - 
+ & - & - 
+ & 13.86 & 
+0.0\%
+ & - & - 
+\\
+2400\_USA-road-d.COL.gr &  - 
  & - & - 
  & - & - 
  & 13.24 & 
 0.0\%
  & - & - 
 \\
-2400\_USA-road-d.NY.gr &  - \%
+\hline\end{tabular}
+\end{center}
+
+\newpage
+\begin{center}
+\renewcommand{\arraystretch}{1.4} 
+ \begin{tabular}{lcrrrrrrrr}
+	\hline
+ & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
+\textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
+
+2400\_USA-road-d.NY.gr &  - 
  & - & - 
  & - & - 
  & 8.17 & 
+0.0\%
+ & - & - 
+\\
+2500\_USA-road-d.COL.gr & 0.0\%
+ & - & - 
+ & 119.14 & 
+ & 44.89 & 
 0.0\%
  & - & - 
 \\
@@ -990,7 +1035,7 @@
 0.0\%
  & - & - 
 \\
-2500\_USA-road-d.NY.gr &  - \%
+2500\_USA-road-d.NY.gr &  - 
  & - & - 
  & - & - 
  & 10.14 & 

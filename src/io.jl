@@ -298,6 +298,9 @@ function resultsArray()
 
     unique!(solvedInstances)
 
+    # Trier par taille d'instance
+    get_number(s) = parse(Int, match(r"(\d+)_", s).captures[1])
+    solvedInstances = sort(solvedInstances, by=get_number)
     
     # Pour chaque méthode de résolution, ajoutez deux colonnes dans le tableau
     for folder in folderName
@@ -326,7 +329,7 @@ function resultsArray()
 
 """
     println(fout, header)
-    maxInstancePerPage = 30
+    maxInstancePerPage = 20
     id = 1
 
     # Pour chaque fichier résolu
@@ -351,7 +354,7 @@ function resultsArray()
         if haskey(objs, "statique")
             println(fout, " & ", abs(round(100*(1-best_robuste/objs["statique"]), digits=2)), "\\%")
         else
-            println(fout, " & ", " - ", "\\%")
+            println(fout, " & ", " - ")
         end
 
         # Pour chaque méthode de résolution
