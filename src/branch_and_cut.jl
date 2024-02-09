@@ -15,14 +15,14 @@ Return
 - nombre de coupes ajoutées
 """
 
-function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
+function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
 
     # Démarrer un chronomètre
     start = time()
 
     # Définir la fonction objective et les contraintes du programme statique
 
-    m = JuMP.Model(CPLEX.Optimizer)
+    m = Model(optimizer_with_attributes(CPLEX.Optimizer, "CPX_PARAM_TILIM" => temps_max))
     # Variables du modèle
     @variable(m, x[1:n, 1:n], Bin)
     @variable(m, y[1:n], Bin)
@@ -105,5 +105,5 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
     optimize!(m)  
 
     #Si m est optimisé, alors on renvoie bien une solution optimale
-    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
+    return termination_status(m) == MOI.OPTIMAL || status == MOI.LOCALLY_SOLVED || status == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
 end

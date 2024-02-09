@@ -142,6 +142,7 @@ function heuristique(n, s, t, S, d1, d2, p, ph, d, D)
     start = time()
     _, path = chemin_vulnerable(n, s, t, S, d2, p, d)
     best_path = path
+    print(path)
 
     #calcul de la valeur du chemin pour le vrai problème robuste
 
@@ -149,10 +150,10 @@ function heuristique(n, s, t, S, d1, d2, p, ph, d, D)
     arcs = []
     cout_arcs = []
     var_cout_arc = []
-    for i in 1::(length(path)-1)
-        arcs.append((path[i],path[i+1]))
-        cout_arcs.append(d[path[i],path[i+1]])
-        var_cout_arc.append(D[path[i],path[i+1]])
+    for i in 1:(length(path)-1)
+        push!(arcs, (path[i],path[i+1]))
+        push!(cout_arcs, (d[path[i],path[i+1]]))
+        push!(var_cout_arc, (D[path[i],path[i+1]]))
     end
 
 
@@ -160,11 +161,11 @@ function heuristique(n, s, t, S, d1, d2, p, ph, d, D)
     #Calcul du vrai poids de notre chemin
     model = JuMP.Model(CPLEX.Optimizer)
     @variable(model, 0 <= delta1[1:length(arcs)])
-    for i in 1::length(arcs)
+    for i in 1:length(arcs)
         @constraint(model,delta1[i] <= D[path[i],path[i+1]])
     end
     @constraint(model,sum(delta1[i] for i in 1:length(arcs)) <= d1)
-    @objective(esclave_1, Max, sum(cout_arcs[i] for i in 1:length(arcs)) + sum(cout_arcs[i]delta1[i] for i in 1:length(arcs)))
+    @objective(model, Max, sum(cout_arcs[i] for i in 1:length(arcs)) + sum(cout_arcs[i]delta1[i] for i in 1:length(arcs)))
     optimize!(model)
     vrai_cout_path = objective_value(model)
 
@@ -173,17 +174,18 @@ function heuristique(n, s, t, S, d1, d2, p, ph, d, D)
     #calcul de l'arête qui doit être éjectée
     pire_arc = 1
     cout_pire_arc = min(d1,var_cout_arc[1])*cout_arcs[1]
-    for i in range 1:length(arcs)
+    for i in 1:length(arcs)
         if cout_pire_arc >= min(d1,var_cout_arc[i])*cout_arcs[i]
             pire_arc = i
             cout_pire_arc = min(d1,var_cout_arc[i])*cout_arcs[i]
         end
     end
 
-    while vrai_cout_path < inf
+    while !isempty(path)
+        
 
         #retirer le pire arc du graphe
-        d[path[i],path[i+1]] = inf
+        d[path[pire_arc],path[pire_arc+1]] = inf
 
         #recalcul des quantités
 
@@ -191,43 +193,48 @@ function heuristique(n, s, t, S, d1, d2, p, ph, d, D)
 
         #calcul de la valeur du chemin pour le vrai problème robuste
 
-        #recuperation de la valeur des arcs
-        arcs = []
-        cout_arcs = []
-        var_cout_arc = []
-        for i in 1::(length(path)-1)
-            arcs.append((path[i],path[i+1]))
-            cout_arcs.append(d[path[i],path[i+1]])
-            var_cout_arc.append(D[path[i],path[i+1]])
-        end
 
-        #Calcul du vrai poids de notre chemin
-        model = JuMP.Model(CPLEX.Optimizer)
-        @variable(model, 0 <= delta1[1:length(arcs)])
-        for i in 1::length(arcs)
-            @constraint(model,delta1[i] <= D[path[i],path[i+1]])
-        end
-        @constraint(model,sum(delta1[i] for i in 1:length(arcs)) <= d1)
-        @objective(esclave_1, Max, sum(cout_arcs[i] for i in 1:length(arcs)) + sum(cout_arcs[i]delta1[i] for i in 1:length(arcs)))
-        optimize!(model)
-        vrai_cout_path = objective_value(model)
 
-        if best_path_cout >= vrai_cout_path
-            best_path_cout = vrai_cout_path
-            best_path = path
-        end
+        if path != []
+            #recuperation de la valeur des arcs
+            arcs = []
+            cout_arcs = []
+            var_cout_arc = []
+            for i in 1:(length(path)-1)
+                push!(arcs, (path[i],path[i+1]))
+                push!(cout_arcs, (d[path[i],path[i+1]]))
+                push!(var_cout_arc, (D[path[i],path[i+1]]))
+            end
+
+            #Calcul du vrai poids de notre chemin
+            model = JuMP.Model(CPLEX.Optimizer)
+            @variable(model, 0 <= delta1[1:length(arcs)])
+            for i in 1:length(arcs)
+                @constraint(model,delta1[i] <= D[path[i],path[i+1]])
+            end
+            @constraint(model,sum(delta1[i] for i in 1:length(arcs)) <= d1)
+            @objective(model, Max, sum(cout_arcs[i] for i in 1:length(arcs)) + sum(cout_arcs[i]delta1[i] for i in 1:length(arcs)))
+            optimize!(model)
+            vrai_cout_path = objective_value(model)
+
+            if best_path_cout >= vrai_cout_path
+                best_path_cout = vrai_cout_path
+                best_path = path
+            end
 
         
-        #calcul de l'arête qui doit être éjectée
-        pire_arc = 1
-        cout_pire_arc = min(d1,var_cout_arc[1])*cout_arcs[1]
-        for i in range 1:length(arcs)
-            if cout_pire_arc >= min(d1,var_cout_arc[i])*cout_arcs[i]
-                pire_arc = i
-                cout_pire_arc = min(d1,var_cout_arc[i])*cout_arcs[i]
+            #calcul de l'arête qui doit être éjectée
+            pire_arc = 1
+
+            cout_pire_arc = min(d1,var_cout_arc[1])*cout_arcs[1]
+            for i in 1:length(arcs)
+                if cout_pire_arc >= min(d1,var_cout_arc[i])*cout_arcs[i]
+                    pire_arc = i
+                    cout_pire_arc = min(d1,var_cout_arc[i])*cout_arcs[i]
+                end
             end
         end
-            
+
     end
 
     return true, best_path, best_path_cout, time()-start #attantion, on renvoie le path et non x

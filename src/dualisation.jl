@@ -15,7 +15,9 @@ Return
 """
 function dualisation(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     # Créer le modèle
-    m = JuMP.Model(CPLEX.Optimizer)
+
+    m = Model(optimizer_with_attributes(CPLEX.Optimizer, "CPX_PARAM_TILIM" => temps_max))
+    # m = JuMP.Model(CPLEX.Optimizer)
     set_optimizer_attribute(m, "CPX_PARAM_SCRIND", 0) # Remove the solver output
 
     # Variables du modèle
@@ -51,7 +53,7 @@ function dualisation(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     start = time()
 
     # Résoudre le modèle
-    MOI.set(m, MOI.RawParameter("CPX_PARAM_TILIM"), temps_max)
+    # MOI.set(m, MOI.RawParameter("CPX_PARAM_TILIM"), temps_max)
     optimize!(m)
 
     return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
