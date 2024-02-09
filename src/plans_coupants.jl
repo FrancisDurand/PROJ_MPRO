@@ -21,7 +21,6 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     start = time()
 
     # Définir la fonction objective et les contraintes du programme maître
-
     m = JuMP.Model(CPLEX.Optimizer)
     # Variables du modèle
     @variable(m, x[1:n, 1:n], Bin)
@@ -131,6 +130,8 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
         # println("y = ", current_y)
     end
 
-    return false, current_x, JuMP.objective_value(m), time() - start
+    #il faut renvoyer le coût réel de x et non pas le coût estimé avec seulement les coupes ajoutées.
+    #Il y a un problème si notre solution n'est pas réalisable
+    return true, current_x, current_z, time() - start
 
 end
