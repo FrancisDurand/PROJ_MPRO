@@ -281,7 +281,7 @@ function resultsArray()
         path = resultFolder * file
         
         # S'il s'agit d'un sous-dossier et pas probleme statique
-        if isdir(path) && file != "statique"
+        if isdir(path) && file != "statique" && file != "heuristique_statique"
             folderName = vcat(folderName, file)
             subfolderCount += 1
             folderSize = size(readdir(path), 1)
