@@ -126,6 +126,18 @@ function save_solution_heuristique(solved, path, obj, resolutionTime, instance)
     close(fout)
 end
 
+function save_solution_heuristique_statique(solved, path, obj, resolutionTime, instance)
+    if solved
+        output_file = "res/" * "heuristique_statique" * "/" * instance
+        fout = open(output_file, "w")
+        println(fout, path)
+        println(fout, "obj = ", obj) 
+    end
+    println(fout, "solveTime = ", resolutionTime) 
+    println(fout, "solved = ", solved)
+    close(fout)
+end
+
 
 """
 Créer un fichier contenant un diagramme de performances associé aux résultats du dossier /res

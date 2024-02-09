@@ -29,6 +29,10 @@ save_solution(solved, x, obj, resolutionTime, "plans_coupants", instance, s)
 solved, x, obj, resolutionTime = branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
 save_solution(solved, x, obj, resolutionTime, "branch_and_cut", instance, s)
 
+# Résolution du problème statique par heuristique
+solved, path, obj, resolutionTime = heuristique_statique(n, s, t, S, p, d)
+save_solution_heuristique_statique(solved, path, obj, resolutionTime, instance)
+
 # Résolution du problème robuste par heuristique
 solved, path, obj, resolutionTime = heuristique(n, s, t, S, d1, d2, p, ph, d, D)
 save_solution_heuristique(solved, path, obj, resolutionTime, instance)
