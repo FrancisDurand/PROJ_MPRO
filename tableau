@@ -2,28 +2,28 @@
 \renewcommand{\arraystretch}{1.4} 
  \begin{tabular}{lcrrrrrrrr}
 	\hline
- & & \multicolumn{2}{c}{\textbf{branch\_and\_cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans\_coupants}}\\
-\textbf{Instance} & \textbf{PR} & \textbf{Temps (s)} & \textbf{Gap}  & \textbf{Temps (s)} & \textbf{Gap}  & \textbf{Temps (s)} & \textbf{Gap}  & \textbf{Temps (s)} & \textbf{Gap} \\\hline
+ & & \multicolumn{2}{c}{\textbf{branch and cut}} & \multicolumn{2}{c}{\textbf{dualisation}} & \multicolumn{2}{c}{\textbf{heuristique}} & \multicolumn{2}{c}{\textbf{plans coupants}}\\
+\textbf{Instance} & \textbf{PR} & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap}  & \textbf{Time} & \textbf{Gap} \\\hline
 
-20\_USA-road-d.BAY.gr & ?
+20\_USA-road-d.BAY.gr & 39.6\%
  & 1.94 & 
-$\times$
+0.0\%
  & 0.04 & 
-$\times$
+63.25\%
  & 0.03 & 
-$\times$
+63.25\%
  & 0.22 & 
-$\times$
+11.04\%
 \\
-20\_USA-road-d.NY.gr & ?
+20\_USA-road-d.NY.gr & 87.3\%
  & 0.36 & 
-$\times$
+0.0\%
  & 0.02 & 
-$\times$
+87.3\%
  & 0.02 & 
-$\times$
+87.3\%
  & 20.05 & 
-$\times$
+0.0\%
 \\
 \hline\end{tabular}
 \end{center}

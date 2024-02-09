@@ -297,14 +297,14 @@ function resultsArray()
     
     # Créez la ligne header qui contient le nom de la méthode
     for folder in folderName
-        header *= " & \\multicolumn{2}{c}{\\textbf{" * replace(folder, "_" => "\\_") * "}}"
+        header *= " & \\multicolumn{2}{c}{\\textbf{" * replace(folder, "_" => " ") * "}}"
     end
 
     header *= "\\\\\n\\textbf{Instance} & \\textbf{PR}"
 
     # Create the second header line with the content of the result columns
     for folder in folderName
-        header *= " & \\textbf{Temps (s)} & \\textbf{Gap} "
+        header *= " & \\textbf{Time} & \\textbf{Gap} "
     end
 
     header *= "\\\\\\hline\n"
@@ -319,23 +319,35 @@ function resultsArray()
 
     # Pour chaque fichier résolu
     for solvedInstance in solvedInstances
+
+        objs = Dict() # valeur de l'objetif de la solution obtenu pour chaque methode
+        for method in vcat(folderName, "statique")
+            path = resultFolder * method * "/" * solvedInstance
+            # Si l'instance a été résolue par cette méthode
+            if isfile(path)
+                include("../" * path)
+                objs[method] = obj
+            end
+        end
+        best_robuste = minimum([value for (key, value) in objs if key != "statique"]) # meilleure solution réalisable du probleme robuste obtenue
+
         if rem(id, maxInstancePerPage) == 0
             println(fout, footer, "\\newpage")
             println(fout, header)
         end 
 
         print(fout, replace(solvedInstance, "_" => "\\_"))
-        println(fout, " & ", "?")
+        println(fout, " & ", round(100*(1-best_robuste/objs["statique"]), digits=2), "\\%")
 
         # Pour chaque méthode de résolution
         for method in folderName
             path = resultFolder * method * "/" * solvedInstance
             # Si l'instance a été résolue par cette méthode
-            if isfile(path)
+            if isfile(path) && method != "statique"
                 include("../" * path)
                 println(fout, " & ", round(solveTime, digits=2), " & ")
                 if solved
-                    println(fout, "\$\\times\$")
+                    println(fout, round(100*(1-best_robuste/objs[method]), digits=2), "\\%")
                 end 
                 
             # Si l'instance n'a pas été résolue par cette méthode
