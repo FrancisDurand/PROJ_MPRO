@@ -1,11 +1,14 @@
 using CPLEX
 using JuMP
 
+inf = 99999999999
+
 """
 Résoudre instance du problème statique
 
 Argument
 - n, s, t, S, p, d : donnés du problème
+- temps_max : temps d'exécution maximum
 
 Return
 - true si le problème est résolu de manière optimale
@@ -13,9 +16,9 @@ Return
 - valeur de la fonction objectif
 - temps de résolution en secondes
 """
-function pb_statique(n, s, t, S, p, d)
+function pb_statique(n, s, t, S, p, d, temps_max)
     # Créer le modèle
-    m = JuMP.Model(CPLEX.Optimizer)
+    m = Model(optimizer_with_attributes(CPLEX.Optimizer, "CPX_PARAM_TILIM" => temps_max))
     set_optimizer_attribute(m, "CPX_PARAM_SCRIND", 0) # Remove the solver output
 
     # Variables du modèle
@@ -48,5 +51,9 @@ function pb_statique(n, s, t, S, p, d)
     # Résoudre le modèle
     optimize!(m)
 
-    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
+    if JuMP.primal_status(m) == MOI.FEASIBLE_POINT && JuMP.objective_value(m) != inf
+        return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
+    else
+        return false, nothing, nothing, time() - start
+    end
 end
