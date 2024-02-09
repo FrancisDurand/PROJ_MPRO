@@ -331,7 +331,6 @@ function resultsArray()
 
     # Pour chaque fichier résolu
     for solvedInstance in solvedInstances
-
         objs = Dict() # valeur de l'objetif de la solution obtenu pour chaque methode
         for method in vcat(folderName, "statique")
             path = resultFolder * method * "/" * solvedInstance
@@ -349,7 +348,11 @@ function resultsArray()
         end 
 
         print(fout, replace(solvedInstance, "_" => "\\_"))
-        println(fout, " & ", round(100*(1-best_robuste/objs["statique"]), digits=2), "\\%")
+        if haskey(objs, "statique")
+            println(fout, " & ", abs(round(100*(1-best_robuste/objs["statique"]), digits=2)), "\\%")
+        else
+            println(fout, " & ", " - ", "\\%")
+        end
 
         # Pour chaque méthode de résolution
         for method in folderName
@@ -359,7 +362,7 @@ function resultsArray()
                 include("../" * path)
                 println(fout, " & ", round(solveTime, digits=2), " & ")
                 if solved
-                    println(fout, round(100*(1-best_robuste/objs[method]), digits=2), "\\%")
+                    println(fout, abs(round(100*(1-best_robuste/objs[method]), digits=2)), "\\%")
                 end 
                 
             # Si l'instance n'a pas été résolue par cette méthode
