@@ -6,6 +6,7 @@ Résoudre instance par dualisation
 
 Argument
 - n, s, t, S, d1, d2, p, ph, d, D : donnés du problème
+- temps_max : temps d'exécution maximum
 
 Return
 - true si le problème est résolu de manière optimale
@@ -53,8 +54,12 @@ function dualisation(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     start = time()
 
     # Résoudre le modèle
-    # MOI.set(m, MOI.RawParameter("CPX_PARAM_TILIM"), temps_max)
     optimize!(m)
 
-    return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
+    if JuMP.primal_status(m) == MOI.FEASIBLE_POINT && JuMP.objective_value(m) != inf
+        return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
+    else
+        return false, nothing, nothing, time() - start
+    end
+
 end

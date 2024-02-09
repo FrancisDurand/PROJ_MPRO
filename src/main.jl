@@ -14,7 +14,7 @@ n, s, t, S, d1, d2, p, ph, d, D = read_instance(file_name)
 temps_max = 20.0
 
 # Problème statique
-isOptimal, x, obj, resolutionTime = pb_statique(n, s, t, S, p, d)
+isOptimal, x, obj, resolutionTime = pb_statique(n, s, t, S, p, d, temps_max)
 save_solution(isOptimal, x, obj, resolutionTime,  "statique", instance, s)
 
 # Resolution par dualisation
