@@ -89,7 +89,7 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
             esclave_2 = JuMP.Model(CPLEX.Optimizer)
             # Variables du modèle
             @variable(esclave_2, 0 <= delta2[1:n] <= 2)
-            @constraint(esclave_2, sum(delta2[v] for v in 1:n) <= d1)
+            @constraint(esclave_2, sum(delta2[v] for v in 1:n) <= d2)
             @objective(esclave_2, Max, sum(current_y[v]*p[v] for v in 1:n) + sum(current_y[v]*ph[v]*delta2[v] for v in 1:n)) #Je suis pas sur que le 1 + passe pour le PL
             optimize!(esclave_2)
             current_delta2 = value.(delta2)
@@ -102,6 +102,8 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D)
             end
     end
     set_attribute(m, MOI.LazyConstraintCallback(),my_callback_function)
-    optimize!(m)
+    optimize!(m)  
+
+    #Si m est optimisé, alors on renvoie bien une solution optimale
     return JuMP.primal_status(m) == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
 end

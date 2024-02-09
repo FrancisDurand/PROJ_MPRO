@@ -93,7 +93,7 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
         esclave_2 = JuMP.Model(CPLEX.Optimizer)
             # Variables du modèle
             @variable(esclave_2, 0 <= delta2[1:n] <= 2)
-            @constraint(esclave_2, sum(delta2[v] for v in 1:n) <= d1)
+            @constraint(esclave_2, sum(delta2[v] for v in 1:n) <= d2)
             
             @objective(esclave_2, Max, sum(current_y[v]*p[v] for v in 1:n) + sum(current_y[v]*ph[v]*delta2[v] for v in 1:n)) 
         optimize!(esclave_2)
