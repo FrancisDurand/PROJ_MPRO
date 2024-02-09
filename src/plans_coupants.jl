@@ -43,10 +43,10 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     @constraint(m, y[t] == sum(x[i,t] for i in 1:n)) # lien entre les variables x et y_t
 
     # Contrainte d'objectif (c'est à dire U^1* = {dij1 = dij})
-    @constraint(m, z >= sum(p[v]*y[v] for v in 1:n))
-
-    # Contrainte de poids (c'est à dire U^2* = {pi2 = pi})
     @constraint(m, z >= sum(d[i,j]*x[i,j] for i in 1:n, j in 1:n))
+    
+    # Contrainte de poids (c'est à dire U^2* = {pi2 = pi})
+    @constraint(m, S >= sum(p[v]*y[v] for v in 1:n))
 
     # Fonction objective
     @objective(m, Min, z)
@@ -58,9 +58,12 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     current_y = value.(y)
     current_z = value(z)
 
+    print("\n", current_z)
+    print("\n", current_x)
+
 
     # Boucle principale du problème d'optimisation par plan coupant
-    while time()-start <= temps_max  #Limite de 100 plans coupants ajoutés pour l'instant
+    while time()-start <= temps_max  #Limite de temps
         
             # Vérifier si l'optimisation a réussi
         if termination_status(m) == MOI.OPTIMAL
@@ -83,10 +86,11 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
             end
             @constraint(esclave_1, sum(delta1[i,j] for i in 1:n, j in 1:n) <= d1)
             
-            @objective(esclave_1, Max, sum(current_x[i,j]*d[i,j] for i in 1:n, j in 1:n) + sum(current_x[i,j]*d[i,j]delta1[i,j] for i in 1:n, j in 1:n)) 
+            @objective(esclave_1, Max, sum(current_x[i,j]*d[i,j] for i in 1:n, j in 1:n) + sum(current_x[i,j]*d[i,j]*delta1[i,j] for i in 1:n, j in 1:n)) 
         optimize!(esclave_1)
         current_delta1 = value.(delta1)
         current_z1 = objective_value(esclave_1)
+        print("current_z1","\n",current_z1,"\n")
 
         
         # Résoudre le sous problème liéé à U^2
@@ -122,6 +126,7 @@ function plan_coupants(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
         current_x = value.(x)
         current_y = value.(y)
         current_z = value(z)
+        print("current_z","\n",current_z,"\n")
 
 
         # Afficher les résultats de l'itération actuelle

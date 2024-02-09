@@ -44,10 +44,10 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
     @constraint(m, y[t] == sum(x[i,t] for i in 1:n)) # lien entre les variables x et y_t
 
     # Contrainte d'objectif (c'est à dire U^1* = {dij1 = dij})
-    @constraint(m, z >= sum(p[v]*y[v] for v in 1:n))
+    @constraint(m, z >= sum(d[i,j]*x[i,j] for i in 1:n, j in 1:n))
 
     # Contrainte de poids (c'est à dire U^2* = {pi2 = pi})
-    @constraint(m, z >= sum(d[i,j]*x[i,j] for i in 1:n, j in 1:n))
+    @constraint(m, S >= sum(p[v]*y[v] for v in 1:n))
 
     # Fonction objective
     @objective(m, Min, z)
@@ -58,7 +58,7 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
         current_x = callback_value.(cb_data, x)
         current_y = callback_value.(cb_data, y)
         current_z = callback_value(cb_data, z)
-        #println("Called from (x, y,z ) = ($current_x, $current_y, $current_z")
+        println("\n \n \n Called from ( ) = $current_z \n \n \n")
         status = callback_node_status(cb_data, m)
             #println("Solution is integer feasible!")
 
@@ -80,7 +80,7 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
             current_z1 = objective_value(esclave_1)
 
             if current_z1 > current_z + 1e-6
-                con = @build_constraint( z >= sum(d[i,j]*x[i,j] for i in 1:n, j in 1:n) + sum(d[i,j]*current_delta1[i,j]*x[i,j] for i in 1:n, j in 1:n))
+                con = @build_constraint( z >= sum(x[i,j]*(d[i,j] + d[i,j]*current_delta1[i,j]) for i in 1:n, j in 1:n))
                 #println("Adding $(con)")
                 MOI.submit(m, MOI.LazyConstraint(cb_data), con)
             end
@@ -96,13 +96,15 @@ function branch_and_cut(n, s, t, S, d1, d2, p, ph, d, D, temps_max)
             current_z2 = objective_value(esclave_2)
 
             if current_z2 > S + 1e-6
-                con = @build_constraint(sum(y[v]*p[v] for v in 1:n) + sum(y[v]*ph[v]*current_delta2[v] for v in 1:n) <= S)
+                con = @build_constraint(sum(y[v]*(p[v] + ph[v]*current_delta2[v]) for v in 1:n) <= S)
                 #println("Adding $(con)")
                 MOI.submit(m, MOI.LazyConstraint(cb_data), con)
             end
     end
-    set_attribute(m, MOI.LazyConstraintCallback(),my_callback_function)
+    # set_attribute(m, MOI.LazyConstraintCallback(),my_callback_function)
     optimize!(m)  
+
+    print(value(z))
 
     #Si m est optimisé, alors on renvoie bien une solution optimale
     return termination_status(m) == MOI.OPTIMAL || status == MOI.LOCALLY_SOLVED || status == MOI.FEASIBLE_POINT, x, JuMP.objective_value(m), time() - start
